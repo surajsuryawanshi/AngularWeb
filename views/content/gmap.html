@@ -1,0 +1,101 @@
+<html>
+  <head>
+
+    <script language="javascript" type="text/javascript">
+    function ak()
+    {
+      var lti = document.getElementById('lat').value;
+      var lgi = document.getElementById('logi').value;
+      var answer = +lti + +lgi;
+      alert('Hello, ' + answer);
+
+    var textbox3 = answer;
+        initMap(Number(lti),Number(lgi));
+      }
+
+
+      function codeAddress() {
+
+
+
+      geocoder = new google.maps.Geocoder();
+      var address = document.getElementById("res").value;
+      geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+
+      var lt=results[0].geometry.location.lat();
+      var lg=results[0].geometry.location.lng();
+
+      
+
+      var ltnum = Number(lt);
+      var lgnum = Number(lg);
+      initMap(ltnum,lgnum);
+      console.log("lg: " + lgnum + " lt: " + ltnum);
+      }
+
+      else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+      });
+
+      }
+
+    </script>
+
+
+
+
+    <style>
+#map {
+        width: 100%;
+        height: 400px;
+     }
+
+
+
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+    <script>
+      function initMap(a, b) {
+        var myLatLng = {lat: a, lng: b};
+
+
+        var mapDiv = document.getElementById('map');
+        var map = new google.maps.Map(mapDiv, {
+            center: {lat:a, lng: b},
+            zoom: 8
+
+        });
+
+        var marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map
+
+  });
+      }
+
+
+
+
+    </script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBisUMoOOIX9fmii30ysEBCMuZwQtEauWA&callback=initMap">
+    </script>
+
+<input type="text" name="lati" class="enter" value="" id="lat"></input>
+<input type="text" name="longi" class="enter" value="" id="logi"></input>
+<input type="text" name="gg" class="enter" value="" id="res"></input>
+
+<input type="button" value="click" OnClick="codeAddress()"/>
+
+
+
+
+
+
+  </body>
+</html>
